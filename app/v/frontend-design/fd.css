@@ -1,0 +1,55 @@
+/* frontend-design variant: "the bottle that becomes each story".
+   Chrome is monochrome mist/indigo; the only accent is --juice, the active perfume's liquid colour,
+   set from script as the collection scrolls. */
+@layer components {
+  .fd {
+    --bg: #eceef1;          /* Harmattan mist */
+    --ink: #161a33;         /* Indigo night */
+    --ink-soft: #4b5068;
+    --line: #c9cdd6;
+    --surface: #f6f7f9;
+    --juice: #7d7a48;       /* overwritten live */
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--fd-sans), system-ui, sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    min-height: 100dvh;
+    transition: background-color .6s ease, color .6s ease;
+  }
+  html[data-theme="dark"] .fd {
+    --bg: #12152b;
+    --ink: #e6e8ee;
+    --ink-soft: #a3a8bd;
+    --line: #2a2f4d;
+    --surface: #181c36;
+  }
+  .fd ::selection { background: var(--juice); color: var(--bg); }
+  .fd :focus-visible { outline: 2px solid var(--juice); outline-offset: 4px; }
+  .fd a, .fd button, .fd label { cursor: pointer; }
+
+  /* type scale: perfect fourth, display in Italiana */
+  .fd-display { font-family: var(--fd-display), serif; font-weight: 400; letter-spacing: 0.01em; line-height: 0.95; }
+  .fd-d1 { font-size: clamp(3.6rem, 9vw, 9.5rem); }
+  .fd-d2 { font-size: clamp(2.8rem, 6vw, 5.6rem); }
+  .fd-d3 { font-size: clamp(2rem, 3.4vw, 3.1rem); }
+  .fd-small { font-size: .875rem; color: var(--ink-soft); }
+
+  .fd-btn {
+    display: inline-flex; align-items: center; height: 3.25rem; padding: 0 1.75rem; border-radius: 999px;
+    white-space: nowrap; font-weight: 500;
+    transition: background-color .35s, color .35s, box-shadow .35s, transform .2s;
+  }
+  .fd-btn:active { transform: scale(.98); }
+  .fd-btn--fill { background: var(--ink); color: var(--bg); }
+  .fd-btn--fill:hover { background: var(--juice); color: #fff; }
+  .fd-btn--line { box-shadow: inset 0 0 0 1px var(--ink); }
+  .fd-btn--line:hover { box-shadow: inset 0 0 0 1px var(--juice); color: var(--juice); }
+
+  .fd-link { background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; transition: background-size .4s, color .3s; }
+  .fd-link:hover { background-size: 100% 1px; color: var(--juice); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .fd, .fd * { transition-duration: 0s !important; animation: none !important; }
+  }
+}
